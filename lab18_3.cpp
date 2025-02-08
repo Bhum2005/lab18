@@ -9,7 +9,10 @@ using namespace std;
 
 struct student{
 
-    //Define struct student with four member (name ,id , gender, gpa);
+    char name[50];
+	int id;
+	char gender;
+	double gpa;
     
 };
 
@@ -63,9 +66,8 @@ int main(){
 	
 	while(getline(student_file,textline)){
 		student s; 
-		
+		sscanf(textline.c_str(),"%s,%d,%c,%lf", s.name,&s.id,&s.gender,&s.gpa);
 		//Use sscanf() to split the values in textline and assign those values to the members of struct s;
-
 		allstudents.push_back(s); 		
 	}
 	
@@ -83,18 +85,20 @@ int main(){
 			if(textline == "> Students"){
 				state = 3;
 			}else{
-			
+				course d;
+				d.lecture_list.push_back(textline);
 			    //Append (push_back) textline to lecture_list[] of the recently added course in allcourses[];
-			    
+			    allcourses.push_back(d);
 			}			
 		}else{
 			if(textline == "---------------------------------------"){
 				state = 1;
 			}else{
 				student *p = findstudent(allstudents,atof(textline.c_str()));
-				
+				course e;
+				e.student_list.push_back(p);
 				//Append (push_back) p to student_list of the recently added course in allcourses[];
-				
+				allcourses.push_back(e);
 			}
 		}
 	}
